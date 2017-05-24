@@ -46,9 +46,9 @@ function confirmComplete(key){
     if(bool){
       console.log(key);
       console.log(_this.state.tasks1[0]);
-      _this.setState((prevState, props) => {
-        prevState.tasks1[key].completed = true;
-        return {tasks1: prevState}
+      _this.state.tasks1[key].completed =true;
+      _this.setState({
+        tasks1: _this.state.tasks1
       });
     }
 }
