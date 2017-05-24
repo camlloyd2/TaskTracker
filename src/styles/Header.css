@@ -1,0 +1,10 @@
+.clipboard {
+    height: 60px;
+    width: 40px;
+}
+.headerLeft {
+    float:left;
+}
+.headerRight {
+    float: right;
+}
