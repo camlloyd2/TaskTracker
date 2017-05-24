@@ -1,0 +1,14 @@
+.completeStar{
+    height: 10px;
+    width: 10px;
+}
+.taskTable{
+    background-color: white;
+    width:100%;
+    color: #216375;
+
+}
+.taskTable, th,td {
+    font-family: courier;
+    border: 5px black;
+}

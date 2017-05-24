@@ -1,7 +1,7 @@
 import React from 'react';
 require("../styles/Menu.css");
 
-export default class Header extends React.Component {
+export default class Menu extends React.Component {
     constructor(props){
         super(props);
 
@@ -9,12 +9,13 @@ export default class Header extends React.Component {
     render(){
         var groups =[];
         for (var i=0;i<this.props.groups.length;i++){
-            groups.push(<button className="groupbutton" key={i}>{this.props.groups[i].name}</button>)
+            var key="group"+i;
+            groups.push(<button className="menubutton" key={key}>{this.props.groups[i].name}</button>)
         }
         return (
             <div>
-                <button>My Tasks</button>
-                <button>Create Group</button>
+                <button className="menubutton">My Tasks</button>
+                <button className="menubutton">Create Group</button>
                 
                 {groups}
             </div>

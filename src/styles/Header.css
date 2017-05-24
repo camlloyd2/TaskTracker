@@ -1,10 +1,22 @@
 .clipboard {
     height: 60px;
     width: 40px;
+    margin-top:20px;
+    margin-left:20px;
 }
 .headerLeft {
     float:left;
 }
+.headerLeft h1{
+    margin-top:0px;
+    color:white;
+}
+.headerLeft h1, .headerLeft img{
+    display:inline-block;
+    font-family:courier;
+}
 .headerRight {
     float: right;
+    color:white;
+    font-family: courier;
 }

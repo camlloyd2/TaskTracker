@@ -18,7 +18,7 @@ export default class Header extends React.Component {
                         <img className="clipboard" src={clipboard} />
                     </div>
                     <div className="headerRight">
-                        <Time value={now} format="MM/DD/YYYY" />
+                        <Time className="headertime"value={now} format="MM/DD/YYYY" />
                          <h2> {this.props.name} </h2>
                    </div>
                 </div>
