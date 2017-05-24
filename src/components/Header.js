@@ -22,6 +22,6 @@ export default class Header extends React.Component {
                          <h2> {this.props.name} </h2>
                    </div>
                 </div>
-            )
+            );
         }
 }
