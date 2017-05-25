@@ -6,12 +6,12 @@ export default class SingleTask extends React.Component {
     }
     render(){
         return(
-        <tr className={this.props.cn}>
-            <td>{this.props.tasks.group}</td>
-            <td>{this.props.tasks.name}</td>
-            <td>{this.props.tasks.imp}</td>
-            <td>{this.props.tasks.due}</td>
-            <td><button id={this.props.ii+"button"} onClick={() => this.props.confirmComplete(this.props.ii)}>Complete!</button></td>
+        <tr key ={this.props.ii}>
+            <td key={this.props.ii+".1"}>{this.props.tasks.group}</td>
+            <td key={this.props.ii+".2"}>{this.props.tasks.name}</td>
+            <td key={this.props.ii+".3"}>{this.props.tasks.imp}</td>
+            <td key={this.props.ii+".4"}>{this.props.tasks.due}</td>
+            <td key={this.props.ii+".5"}><button onClick={() => this.props.confirmComplete(this.props.ii)}>Complete!</button></td>
          </tr>
         );
     }

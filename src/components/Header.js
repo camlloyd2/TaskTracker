@@ -13,11 +13,11 @@ export default class Header extends React.Component {
             let now= new Date();
             return (
                 <div className="Header" >
-                    <div className="headerLeft">
+                    <div key="1" className="headerLeft">
                         <h1> Task Tracker </h1>
                         <img className="clipboard" src={clipboard} />
                     </div>
-                    <div className="headerRight">
+                    <div key="2" className="headerRight">
                         <Time className="headertime"value={now} format="MM/DD/YYYY" />
                          <h2> {this.props.name} </h2>
                    </div>

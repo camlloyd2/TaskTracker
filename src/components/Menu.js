@@ -9,13 +9,13 @@ export default class Menu extends React.Component {
     render(){
         var groups =[];
         for (var i=0;i<this.props.groups.length;i++){
-            var key="group"+i;
+            var key=2+i;
             groups.push(<button className="menubutton" key={key}>{this.props.groups[i].name}</button>)
         }
         return (
             <div>
-                <button className="menubutton">My Tasks</button>
-                <button className="menubutton">Create Group</button>
+                <button className="menubutton" key="1">My Tasks</button>
+                <button className="menubutton" key="2">Create Group</button>
                 
                 {groups}
             </div>
