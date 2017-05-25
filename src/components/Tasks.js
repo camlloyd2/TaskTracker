@@ -4,15 +4,12 @@ import SingleTask from  './SingleTask';
 require("../styles/Tasks.css");
 
 export default class Tasks extends React.Component {
-    constructor(props){
-        super(props);
-    }
     render(){
         var tasks = [];
         for(var i=0;i<this.props.tasks.length;i++){
             if(this.props.tasks[i].completed == false){
                 tasks.push(
-                    <SingleTask ii={i} tasks={this.props.tasks[i]} confirmComplete={this.props.confirmComplete}/>
+                    <SingleTask ii={i} task={this.props.tasks[i]} confirmComplete={this.props.confirmComplete}/>
             );
             }
         }

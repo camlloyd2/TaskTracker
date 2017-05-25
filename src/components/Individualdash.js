@@ -24,7 +24,7 @@ export default class Individualdash extends Component {
     }
   }
     render() {
-      console.log(_this.state.tasks1);
+      // console.log(_this.state.tasks1);
       return (
         <div key="1" className="App">
           <div className="Header">
