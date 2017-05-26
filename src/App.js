@@ -5,6 +5,7 @@ import Groupdash from  './components/Groupdash';
 import Login from  './components/Login';
 import Creategroup from  './components/Creategroup';
 import Createaccount from  './components/Createaccount';
+require('./styles/App.css');
 
 
 class App extends Component {
@@ -14,7 +15,7 @@ class App extends Component {
     render() {
       return (
         <Router>
-          <div>
+          <div className="App">
             <Route exact={true} path="/" component={Individualdash} />
             <Route path="/groups/:group" component={Groupdash} />
             <Route path="/login" component={Login} />

@@ -1,0 +1,24 @@
+.CreateaccountForm p {
+    color: white;
+    margin-top:25px;
+    margin-bottom:5px;
+    text-align: center;
+    
+}
+.CreateaccountForm Text, .CreateaccountForm button{
+    text-align: center;
+    margin-top: 10px;
+}
+.CreateaccountForm{
+    height:100%;
+    width:100%; 
+    vertical-align: center;
+    color:white;
+    
+}
+.CreateaccountForm h1 {
+    color:white;
+}
+.App{
+    height:100%;
+}
