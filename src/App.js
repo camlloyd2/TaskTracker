@@ -5,7 +5,7 @@ import Groupdash from  './components/Groupdash';
 import Login from  './components/Login';
 import Creategroup from  './components/Creategroup';
 import Createaccount from  './components/Createaccount';
-//var PropTypes = require('prop-types');
+
 
 class App extends Component {
   constructor(){

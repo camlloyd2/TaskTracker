@@ -8,24 +8,23 @@ export default class Members extends React.Component {
         super(props);
         _this = this;
         this.state = {
-            value: '',
-            members:this.props.members
+            value: ''
         }
     }
     handleChange(e){
-        _this.setState({value:e.target.value,members:_this.state.members});
+        _this.setState({value:e.target.value});
     }
     handleSubmit(e){
-        console.log("handle submit reached"+ _this.state.value)
+        //console.log("handle submit reached"+ _this.state.value)
         _this.props.addMember(_this.state.value);
-        _this.setState({value:'',members:_this.state.members});
+        _this.setState({value:''});
     }
     render() {
-        console.log(this.state.members);
+        //console.log(this.state.members);
         var members = [];
-        for (var i = 0; i < _this.state.members.length; i++) {
+        for (var i = 0; i < _this.props.members.length; i++) {
             members.push(
-                <Member ii = {i} member = {_this.state.members[i]} />
+                <Member ii = {i} member = {_this.props.members[i]} />
             );       
         }
         return(
@@ -38,13 +37,13 @@ export default class Members extends React.Component {
                     {members}
             </table>
                 
-            <form onSubmit ={_this.handleSubmit}>
+            <div>
                 <label>
                     Name:
                         <input type="text" placeholder="New Member Name" value ={_this.state.value} onChange={_this.handleChange} />
                 </label>
-                <input type = 'submit' value = 'Submit' />
-            </form>
+                <button onClick={() => _this.handleSubmit()}>Submit </button>
+            </div>
             </div>
           
         )
