@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import '../styles/Individualdash.css';
 import Header from  './Header';
 import Menu from  './Menu';
@@ -7,10 +6,9 @@ import Members from './Members';
 import CreateTask from './Createtask.js'
 import Time from 'react-time';
 import DatePicker from 'material-ui/DatePicker';
-import Grouptasks from './Grouptasks';
+import GroupTasks from './Grouptasks';
 require("../styles/datetime.css");
-//var PropTypes = require('prop-types');
-
+require("../styles/GroupDash.css");
 
 var fam = {name: "fam"};
 var apartment = {name: "apartment"}
@@ -61,11 +59,11 @@ export default class Groupdash extends Component {
             </div>
         </div>
         <div>
-            <div>
+            {/*<div>
               <CreateTask addTask={this.addTask}/>
-            </div>
+            </div>*/}
             <div>
-              <Grouptasks tasks={this.state.tasks}/>
+              <GroupTasks tasks={this.state.tasks}/>
             </div>
         </div>
       </div>

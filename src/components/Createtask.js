@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import Time from 'react-time';
 import DatePicker from 'material-ui/DatePicker';
-//import DateTime from 'react-datetime';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import TextField from 'material-ui/TextField';
+import Toggle from 'material-ui/Toggle';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 require("../styles/datetime.css");
 
 var now= new Date();
 var _this;
+const optionsStyle = {
+  maxWidth: 255,
+  marginRight: 'auto',
+};
+
 
 export default class CreateTask extends Component {
     constructor(props){
