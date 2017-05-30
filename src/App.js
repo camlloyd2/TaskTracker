@@ -7,7 +7,6 @@ import Creategroup from  './components/Creategroup';
 import Createaccount from  './components/Createaccount';
 require('./styles/App.css');
 
-
 class App extends Component {
   constructor(){
     super();
