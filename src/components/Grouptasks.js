@@ -1,49 +1,52 @@
-import React from 'react';
-import SingleTaskGroup from './SingleTaskGroup';
-import {Table,TableRow, TableRowColumn, TableHeader, TableHeaderColumn, TableBody, TableFooter} from 'material-ui/DatePicker';
+//ANALAGOUS TO APP.JS
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import TaskInput from './TaskInput.js';
+import GroupTaskTable from './GroupTaskTable.js';
 
-export default class Grouptasks extends React.Component {
-    render() {
-        console.log("here are the taske"+this.props.tasks); 
-        var tasks = [];
-        for (var i = 0; i < this.props.tasks.length; i++) {
-            console.log(this.props.tasks[i].member);
-            tasks.push(
-                <SingleTaskGroup ii = {i} task={this.props.tasks[i]} />
-            );       
-        }
-        return(
-            <div>react sucks</div>
-            /*<div>
-            <MuiThemeProvider>
-                <Table>
-                    <TableHeader>
-                        <TableHeaderColumn>hello</TableHeaderColumn>
-                    </TableHeader>
-                </Table>
-            </MuiThemeProvider>
-            </div>*/
-            /*<table className="TaskTableGroup">
-                <tr key="1">
-                    <th key="1.1">Name</th>
-                    <th key="1.2">Task</th>
-                    <th key="1.3">Importance</th>
-                    <th key="1.4">Due By</th>
-                    <th key="1.5">Completed</th>
-                </tr>
 
-                {this.props.tasks.map((task,i) => {
-                        <tr>
-                            <td>{task.member}</td>
-                            <td>{task.name}</td>
-                            <td>{task.imp}</td>
-                            <td>{task.due}</td>
-                            <td>{task.completed}</td>
-                            </tr>})}
-                    {tasks}
-            </table>*/
-          
-        );
+var key = 0;
+var _this;
+export default class GroupTasks extends Component {
+  constructor() {
+      super();
+      _this = this;
+      this.state = {
+        tasks:[]
+      };
+  }
+  addTask(data){
+    var task = {
+      member_name:data.member_name,
+      task_name:data.task_name,
+      rating:data.rating,
+      due_by:data.due_by,
+      completed:false,
+      key:key
     }
+    key +=1;
+    var tasks = _this.state.tasks.slice().concat([task]);
+    _this.setState({
+      tasks:tasks
+    });
+  }
+
+  render() {
+      console.log("render grouptasks");
+    return (
+      <div className="GroupTasks">
+        <div>
+            <MuiThemeProvider>
+                <TaskInput addTask={this.addTask}/>
+            </MuiThemeProvider>
+
+            <MuiThemeProvider>
+                <GroupTaskTable tasks={this.props.tasks}/>
+            </MuiThemeProvider>
+        </div>
+      </div>
+    )
+  }
 }
+
