@@ -7,7 +7,6 @@ import {
   TableHeader,
   TableHeaderColumn,
   TableRow,
-  TableRowColumn,
 } from 'material-ui/Table';
 require("../styles/Tasks.css");
 
@@ -35,13 +34,6 @@ export default class Tasks extends React.Component {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {/*<TableRow>
-                        <TableRowColumn>this.props.task.group</TableRowColumn>
-                        <TableRowColumn>this.props.task.name</TableRowColumn>
-                        <TableRowColumn>this.props.tasks.imp</TableRowColumn>
-                        <TableRowColumn>this.props.tasks.due</TableRowColumn>
-                        <TableRowColumn><button onClick={() => this.props.confirmComplete(0)}>Complete!</button></TableRowColumn>
-                    </TableRow>*/}
                     {tasks}
                 </TableBody>
             </Table>

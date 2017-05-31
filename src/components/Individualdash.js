@@ -5,7 +5,6 @@ import Header from  './Header';
 import Menu from  './Menu';
 import Tasks from  './Tasks';
 import star from '../images/star.gif';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {
   Table,
   TableBody,
@@ -54,13 +53,12 @@ export default class Individualdash extends Component {
       })
       return (
         <div className="App">
-          {/*<div key="1" className="Header">*/}
+          <div className="Header">
           <Header name="My DashBoard" />
-        {/*</div>
-        <div key="2"className="Menu">*/}
+          </div>
+          <div className="Menu">
           <Menu groups={groups1}/>
-        {/*</div>*/}
-          {/*<Tasks confirmComplete={confirmComplete} tasks={this.state.tasks}/>*/}
+          </div>
           <Table className="taskTable">
                 <TableHeader>
                     <TableRow >
