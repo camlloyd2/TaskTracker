@@ -1,12 +1,16 @@
 import React from 'react';
+import {
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table';
 
 export default class Member extends React.Component {
     render(){
         return(
-        <tr key ={this.props.ii}>
-            <td key={this.props.ii+".1"}>{this.props.member.name}</td>
-            <td key={this.props.ii+".2"}>{this.props.member.score}</td>
-         </tr>
+        <TableRow selectable={false}>
+            <TableRowColumn >{this.props.member.name}</TableRowColumn>
+            <TableRowColumn>{this.props.member.score}</TableRowColumn>
+         </TableRow>
         );
     }
 }

@@ -14,86 +14,85 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import DatePicker from 'material-ui/DatePicker';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 require('../styles/TaskInput.css')
 
 injectTapEventPlugin();
 
-var _this;
+
 var now = new Date();
 export default class TaskInput extends Component {
     constructor(){
         super();
-        _this = this;
         this.state=({
-            member_name:'',
-            task_name:'',
-            rating:'',
-            due_by:'',
-            completed:'',
+            name:'',
+            imp:'',
+            due:''
 
         });
+        this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleDueByChange = this.handleDueByChange.bind(this);
+        this.handleRatingChange = this.handleRatingChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
-    handleMemberNameChange(e){
-        var state = _this.state;
-        state.member_name = e.target.value;
-        _this.setState({
+    handleNameChange(e){
+        var state = this.state;
+        state.name = e.target.value;
+        this.setState(
             state
-        });
-    }
-
-    handleTaskNameChange(e){
-        var state = _this.state;
-        state.task_name = e.target.value;
-        _this.setState({
-            state
-    });
+    );
 
     }
     handleRatingChange(e){
-        var state = _this.state
-        state.rating = e.target.value;
-        _this.setState({
+        var state = this.state
+        state.imp = e.target.value;
+        this.setState(
             state
-        });
+        );
     }
     handleDueByChange = (e, date) => {
-        var state = _this.state
-        state.due_by = date;
-        console.log(state.due_by)
-        _this.setState({
+        var state = this.state
+        state.due = date;
+        this.setState(
             state
-        });
+            );
+    }
+    handleSubmit(){
+        console.log("handlesubmit reached");
+        this.props.addTask(this.state)
+        this.setState({
+            name:'',
+            imp:'',
+            due:''
+        })
     }
 
     render() {
         return (
-            <div className = 'input'>
-                <MuiThemeProvider>
-                    <TextField hintText = "Task Name" value={this.state.name} onChange={this.handleNameChange}/>
-                </MuiThemeProvider>
-
-                <MuiThemeProvider>
-                    <TextField hintText= "Task Rating (1-5)" value={this.state.rating} onChange={this.handleRatingChange}/>
-                </MuiThemeProvider>
-
-               <label>
-                    <p>Due By:</p>
-                    <MuiThemeProvider>
+            <Table>
+                <TableHeader displaySelectAll={false}
+            adjustForCheckbox={false}>
+                <TableRow>
+                    <TableRowColumn>
+                        <TextField hintText = "Task Name" value={this.state.name} onChange={this.handleNameChange}/>
+                    </TableRowColumn>
+                    <TableRowColumn>
+                        <TextField type="number" min="1" max="5" hintText= "Task Rating (1-5)" value={this.state.imp} onChange={this.handleRatingChange}/>
+                    </TableRowColumn>
+                    <TableRowColumn>
                         <DatePicker defaultDate={now} 
-                        hintText="Choose a due by date" 
-                        value={this.state.due_by} 
-                        onChange = {this.handleDueByChange}
-      />
-                    </MuiThemeProvider>
-                </label>
-
-                <MuiThemeProvider>
-                    <FlatButton onClick={this.handleSubmit}  
-                        label="Submit"  />
-                </MuiThemeProvider>
-            </div>
-
+                            hintText="Choose a due by date" 
+                            value={this.state.due} 
+                            onChange = {this.handleDueByChange}/>
+                    </TableRowColumn>
+                    <TableRowColumn>
+                        <FlatButton onClick={this.handleSubmit}  label="Submit"  />
+                    </TableRowColumn>
+                </TableRow>
+                </TableHeader>
+            </Table>
         )
-
+    
     }
 }

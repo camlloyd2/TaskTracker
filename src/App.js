@@ -5,6 +5,7 @@ import Groupdash from  './components/Groupdash';
 import Login from  './components/Login';
 import Creategroup from  './components/Creategroup';
 import Createaccount from  './components/Createaccount';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 require('./styles/App.css');
 
 
@@ -15,6 +16,7 @@ class App extends Component {
     render() {
       return (
         <Router>
+          <MuiThemeProvider>
           <div className="App">
             <Route exact={true} path="/" component={Individualdash} />
             <Route path="/groups/:group" component={Groupdash} />
@@ -23,6 +25,7 @@ class App extends Component {
             <Route path="/createaccount" component={Createaccount} />
 
           </div>
+          </MuiThemeProvider>
         </Router>
     );
     }

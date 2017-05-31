@@ -1,3 +1,19 @@
 .Members {
-    float:left,
+    float:left;
+    width:30%;
+}
+
+.groupstuff {
+    margin-top:12px;
+    margin-right:12px;
+    float:right;
+    width:70%;
+    
+}
+
+.memberTable {
+    margin-top:12px;
+    margin-left: 12px;
+    float:left;
+    width:27%;
 }
