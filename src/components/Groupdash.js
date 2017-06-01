@@ -63,6 +63,7 @@ export default class Groupdash extends Component {
     getGroups(this.props.id);
     getTasks(group);
     getMembers(group);
+    getAllMembers();
     this.addTask = this.addTask.bind(this);
     this.addMember = this.addMember.bind(this);
   }
@@ -169,7 +170,6 @@ function getGroups(id){
   });
 }
 function getGroupsInfo(data){
-  var groups =[];
   for(var key in data){
     var group_key = data[key].key;
     getGroup(group_key);
@@ -252,5 +252,30 @@ function getMember(key){
       state.members = members;
       _this.setState(state);
     });
+  });
+}
+
+function getAllMembers(){
+  var members = database.ref('/members/');
+    members.once('value', function(snapshot){
+      getAllMembersInfo(snapshot.val());
+  });
+}
+function getAllMembersInfo(data){
+  for(var key in data){
+    var member_key = data[key].key;
+    getAllMember(member_key);
+  }
+  
+}
+function getAllMember(key){
+  var member = database.ref('/member/'+key);
+  member.once('value', function(snapshot){
+    var mem = snapshot.val();
+    mem.key = key;
+    var members = _this.state.allmembers.slice().concat([mem]);
+    var state = _this.state;
+    state.allmembers =members;
+    _this.setState(state);
   });
 }
