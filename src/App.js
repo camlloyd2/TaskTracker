@@ -9,19 +9,26 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 require('./styles/App.css');
 
 class App extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
+    this.state = {
+      id:"-KlZK5LSVBOEND7SCbq-"
   }
+  this.updateState = this.updateState.bind(this);
+}
+    updateState(key){
+      this.state({id:key});
+    }
     render() {
       return (
         <Router>
           <MuiThemeProvider>
           <div className="App">
-            <Route exact={true} path="/" component={Individualdash} />
-            <Route path="/groups/:group" component={Groupdash} />
-            <Route path="/login" component={Login} />
-            <Route path="/creategroup" component={Creategroup} />
-            <Route path="/createaccount" component={Createaccount} />
+            <Route exact={true} path="/" component={() => (<Individualdash id={this.state.id} />) } />
+            <Route path="/groups/:group" component={() => (<Groupdash id={this.state.id} />) } />
+            <Route path="/login" component={() => (<Login updateId={this.updateState} />) } />
+            <Route path="/creategroup" component={() => (<Creategroup id={this.state.id} />) } />
+            <Route path="/createaccount" component={() => (<Createaccount updateId={this.updateState} />) } />
 
           </div>
           </MuiThemeProvider>
