@@ -8,7 +8,6 @@ import Createaccount from  './components/Createaccount';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 require('./styles/App.css');
 
-
 class App extends Component {
   constructor(){
     super();
