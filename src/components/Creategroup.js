@@ -23,7 +23,8 @@ export default class CreateGroup extends Component {
             tempGroupName:'',
             GroupName:'',
             tempEmail:'',
-            memberEmails: []
+            memberEmails: [],
+            acceptableEmails: ['email1','email2','email3']
         });
     this.handleGroupNameChange = this.handleGroupNameChange.bind(this);
     this.handleMemberChange = this.handleMemberChange.bind(this);
@@ -58,7 +59,8 @@ export default class CreateGroup extends Component {
         var state = _this.state;
         var stringTempEmail = state.tempEmail.toString();
         var found = state.memberEmails.includes(stringTempEmail);
-        if (!found){
+        var acceptable = state.acceptableEmails.includes(stringTempEmail);
+        if (!found && acceptable){
             state.memberEmails = state.memberEmails.slice().concat([state.tempEmail]);
         }
         state.tempEmail = '';

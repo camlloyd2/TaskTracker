@@ -43,7 +43,8 @@ export default class Groupdash extends Component {
     //var tasks=[task1,task2,task3]
     var state = {
       members:JSON.parse(data.getItem('members')),
-      tasks:JSON.parse(data.getItem('tasks'))
+      tasks:JSON.parse(data.getItem('tasks')),
+      acceptableMembers: ['cam', 'will', 'annie']
     }
     this.state = state
 
@@ -61,10 +62,16 @@ export default class Groupdash extends Component {
     }
     addMember(name){
       var newperson = {key:name, name: name, score: 0};
-      var newmembers = this.state.members.slice().concat([newperson]);
-      this.setState({
-        members: newmembers
-      });
+
+      var newPersonName = newperson.name.toString()
+      var found = this.state.members.includes(newPersonName);
+      var acceptable = this.state.acceptableMembers.includes(newPersonName);
+      if (!found && acceptable){
+          var newmembers = this.state.members.slice().concat([newperson]);
+          this.setState({
+            members: newmembers
+          });
+      }
     }
     render() {
       var tasks = this.state.tasks.map((data) => {
@@ -86,7 +93,7 @@ export default class Groupdash extends Component {
       return (
         <div className="App">
           <div className="Header">
-          <Header name={group+"Dashboard"} />
+          <Header name={group+" Dashboard"} />
           </div>
           <div className="Menu">
           <Menu groups={groups1}/>

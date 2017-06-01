@@ -22,11 +22,9 @@ export default class Createaccount extends React.Component {
           _this = this;
           this.state=({
              email:'',
-             password:''
           });
       this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
       this.handleEmailChange = this.handleEmailChange.bind(this);
-      this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
       handleEmailChange(e){
@@ -37,13 +35,6 @@ export default class Createaccount extends React.Component {
           });
       }
 
-      handlePasswordChange(e){
-      var state = this.state;
-      state.password = e.target.value;
-      _this.setState({
-          state
-      });
-    }
 
       handleLoginSubmit(e){
           //need to send state to google firebase
@@ -52,7 +43,7 @@ export default class Createaccount extends React.Component {
           return(
               <div className = 'input'>
                   <h1 className = "h1"> Login to TaskTracker </h1>
-                  <Table>
+                  <Table className = 'table'>
                       <TableHeader 
                           displaySelectAll={false}
                           >
@@ -62,9 +53,6 @@ export default class Createaccount extends React.Component {
                               </TableRowColumn>
                           </TableRow>
                           <TableRow>
-                              <TableRowColumn>
-                                  <TextField hintText = "Enter Password" value={this.state.password} onChange={this.handlePasswordChange}/>
-                              </TableRowColumn>
                               <TableRowColumn>
                                   <FlatButton onClick={this.handleLoginSubmit}  
                                       label="Submit"  />
