@@ -14,7 +14,7 @@ export default class Menu extends React.Component {
             groups.push(<button className="menubutton" key={key}>{this.props.groups[i].name}</button>)
         }
         return (
-            <div>
+            <div className="Menu">
                 <button className="menubutton" key="1">My Tasks</button>
                 <button className="menubutton" key="2">Create Group</button>
                 

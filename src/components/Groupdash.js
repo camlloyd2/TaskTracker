@@ -85,12 +85,8 @@ export default class Groupdash extends Component {
         console.log(data);
       return (
         <div className="App">
-          <div className="Header">
           <Header name={group+"Dashboard"} />
-          </div>
-          <div className="Menu">
           <Menu groups={groups1}/>
-          </div>
           <Members addMember={this.addMember} members = {this.state.members} />
           <div className = "groupstuff">
             <TaskInput addTask={this.addTask}/>

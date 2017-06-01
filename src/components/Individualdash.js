@@ -39,8 +39,9 @@ export default class Individualdash extends Component {
     this.state = tasks;
   }
     render() {
-      console.log(this);
+      //console.log(this);
       var tasks = this.state.tasks.map((data,i) => {
+        console.log(data);
         return (
           <TableRow hidden={data.completed}>
                 <TableRowColumn>{data.group.name}</TableRowColumn>
@@ -53,12 +54,8 @@ export default class Individualdash extends Component {
       })
       return (
         <div className="App">
-          <div className="Header">
           <Header name="My DashBoard" />
-          </div>
-          <div className="Menu">
           <Menu groups={groups1}/>
-          </div>
           <Table className="taskTable">
                 <TableHeader>
                     <TableRow >
