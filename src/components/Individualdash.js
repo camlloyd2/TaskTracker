@@ -44,6 +44,7 @@ export default class Individualdash extends Component {
     getGroups(this.props.id);
     //initDatabase();
   }
+
     confirmComplete(key){
       var bool = window.confirm("Are you sure you have completed this task?");
       if(bool){
@@ -91,6 +92,7 @@ export default class Individualdash extends Component {
     );
     }
 }
+
 
 function updateCompletedDB(task){
   firebase.database().ref('/tasks/' + task.key).set({
@@ -257,4 +259,5 @@ function initDatabase(){
 //   firebase.database().ref('/groups/' + key3+ '/tasks/'+key16).set({
 //       key:key6
 //   });
+
 }

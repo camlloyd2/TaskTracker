@@ -81,10 +81,15 @@ export default class Groupdash extends Component {
     }
     addMember(name){
       var newperson = {name: name, score: 0};
-      var members = this.state.members.slice().concat([newperson]);
-      var state = this.state;
-      state.members = members;
-      this.setState(state);
+      var found = this.state.members.includes(newperson.name);
+      var acceptable = this.state.allmembers.includes(newperson.name);
+      if (!found && acceptable){
+        var members = this.state.members.slice().concat([newperson]);
+        var state = this.state;
+        state.members = members;
+        this.setState(state);
+      }
+
     }
     render() {
       var tasks = this.state.tasks.map((data) => {
@@ -105,8 +110,13 @@ export default class Groupdash extends Component {
         console.log(data);
       return (
         <div className="App">
-          <Header name={group+"Dashboard"} />
+
+          <div className="Header">
+          <Header name={group+" Dashboard"} />
+          </div>
+          <div className="Menu">
           <Menu groups={this.state.groups}/>
+          </div>
           <Members addMember={this.addMember} members = {this.state.members} />
           <div className = "groupstuff">
             <TaskInput addTask={this.addTask}/>
