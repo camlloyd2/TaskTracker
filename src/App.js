@@ -10,9 +10,16 @@ import { Redirect } from 'react-router';
 require('./styles/App.css');
 
 class App extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
+    this.state = {
+      id:"-KlZK5LSVBOEND7SCbq-"
   }
+  this.updateState = this.updateState.bind(this);
+}
+    updateState(key){
+      this.state({id:key});
+    }
     render() {
       return (
         <Router>
@@ -25,11 +32,13 @@ class App extends Component {
                 <Login/>
               )
             )}/>*/}
-            <Route path = '/home' component={Individualdash} />
-            <Route path="/groups/:group" component={Groupdash} />
-            <Route path="/login" component={Login} />
-            <Route path="/creategroup" component={Creategroup} />
-            <Route path="/createaccount" component={Createaccount} />
+
+            <Route exact={true} path="/home" component={() => (<Individualdash id={this.state.id} />) } />
+            <Route path="/groups/:group" component={() => (<Groupdash id={this.state.id} />) } />
+            <Route path="/login" component={() => (<Login updateId={this.updateState} />) } />
+            <Route path="/creategroup" component={() => (<Creategroup id={this.state.id} />) } />
+            <Route path="/createaccount" component={() => (<Createaccount updateId={this.updateState} />) } />
+
           </div>
           </MuiThemeProvider>
         </Router>

@@ -42,8 +42,7 @@ export default class Menu extends React.Component {
                     </TableRow>
                 </TableHeader>
             </Table>
-                            
-
+                        
         );
     }
 }
