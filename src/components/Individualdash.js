@@ -23,12 +23,12 @@ var groups1 = [fam,apartment];
 var _this;
 
 var data = localStorage;
-// var task1 = {group:fam,name:"Trash",member:"will",imp:2,due:"5/31/2017",completed:false};
-// var task2 = {group:apartment,name:"Dishes",member:"cam",imp:4,due:"6/2/2017",completed:false};
-// var task3 = {group:fam,name:"Clothes",member:"will",imp:3,due:"5/30/2017",completed:false};
+// var task1 = {group:"fam",name:"Trash",member:"will",imp:2,due:"5/31/2017",completed:false};
+// var task2 = {group:"apartment",name:"Dishes",member:"cam",imp:4,due:"6/2/2017",completed:false};
+// var task3 = {group:"fam",name:"Clothes",member:"will",imp:3,due:"5/30/2017",completed:false};
 // var tasks = JSON.stringify([task1,task2,task3]);
 // var test_task = [{group:fam},{name:'clothes'}]
-//data.setItem('tasks', tasks);
+// data.setItem('tasks', tasks);
 
 
 export default class Individualdash extends Component {
@@ -39,11 +39,11 @@ export default class Individualdash extends Component {
     this.state = tasks;
   }
     render() {
-      console.log(this);
       var tasks = this.state.tasks.map((data,i) => {
+        console.log(data);
         return (
           <TableRow hidden={data.completed}>
-                <TableRowColumn>{data.group.name}</TableRowColumn>
+                <TableRowColumn>{data.group}</TableRowColumn>
                 <TableRowColumn>{data.name}</TableRowColumn>
                 <TableRowColumn>{data.imp}</TableRowColumn>
                 <TableRowColumn>{data.due}</TableRowColumn>
@@ -81,8 +81,8 @@ export default class Individualdash extends Component {
 function confirmComplete(key){
     var bool = window.confirm("Are you sure you have completed this task?");
     if(bool){
-      console.log(key);
-      console.log(_this.state.tasks[0]);
+      //console.log(key);
+      //console.log(_this.state.tasks[0]);
       _this.state.tasks[key].completed =true;
       _this.setState({
         tasks: _this.state.tasks
