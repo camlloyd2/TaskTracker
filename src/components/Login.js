@@ -41,7 +41,7 @@ export default class Createaccount extends React.Component {
           //if ('email is valid') {
             var loggedIn = true
             //get user ID
-            updateId()
+            //updateId()
           //}
         
       }

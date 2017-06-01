@@ -21,11 +21,10 @@ export default class Createaccount extends React.Component {
           _this = this;
           this.state=({
              email:'',
-             password:''
+             name:'',
+             unacceptableEmails:['unacceptable1']
           });
-      this.handleCreateAccountSubmit = this.handleCreateAccountSubmit.bind(this);
       this.handleEmailChange = this.handleEmailChange.bind(this);
-      this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
       handleEmailChange(e){
@@ -35,18 +34,31 @@ export default class Createaccount extends React.Component {
               state
           });
       }
-
-      handlePasswordChange(e){
-      var state = this.state;
-      state.password = e.target.value;
-      _this.setState({
-          state
-      });
-    }
-
-      handleCreateAccountSubmit(e){
-          //need to send state to google firebase
+      handleNameChange(e){
+          var state = _this.state;
+          state.name = e.target.value;
+          _this.setState({
+              state
+          });
       }
+
+    handleNewUserSubmit(e){
+        var state = _this.state;
+        var userEmail = state.email.toString();
+        var acceptable = !(state.unacceptableEmails.includes(userEmail));
+        if (acceptable){
+            // send to firebase
+            //redirect to home 
+        } else {
+            console.log('not acceptable')
+            
+        }
+        state.email = '';
+        state.name = '';
+        _this.setState({
+            state
+        });
+    }
       render() {
           return(
               <div className = 'input'>
@@ -59,16 +71,14 @@ export default class Createaccount extends React.Component {
                               <TableRowColumn>
                                   <TextField hintText = "Enter Email" value={this.state.email} onChange={this.handleEmailChange}/>
                               </TableRowColumn>
-                          </TableRow>
-                          <TableRow>
                               <TableRowColumn>
-                                  <TextField hintText = "Enter Password" value={this.state.password} onChange={this.handlePasswordChange}/>
+                                  <TextField hintText = "Enter Name" value={this.state.name} onChange={this.handleNameChange}/>
                               </TableRowColumn>
                               <TableRowColumn>
-                                  <FlatButton onClick={this.handleCreateAccountSubmit}  
+                                  <FlatButton onClick={this.handleNewUserSubmit}  
                                       label="Submit"  />
                               </TableRowColumn>
-                          </TableRow>
+                        </TableRow>
                       </TableHeader>
             
                   </Table>
