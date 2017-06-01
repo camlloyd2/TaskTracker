@@ -48,7 +48,7 @@ export default class Members extends React.Component {
                     <TableBody displayRowCheckbox={false}>
                         {members} 
                         <TableRow selectable={false}>
-                            <TableRowColumn> <TextField hintText="New Member Name" value ={_this.state.value} onChange={_this.handleChange} /></TableRowColumn>
+                            <TableRowColumn> <TextField hintText="New Member Email" value ={_this.state.value} onChange={_this.handleChange} /></TableRowColumn>
                             <TableRowColumn> <FlatButton onClick={() => _this.handleSubmit()}>Submit</FlatButton> </TableRowColumn>
                         </TableRow>
                     </TableBody>
