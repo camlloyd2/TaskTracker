@@ -6,6 +6,7 @@ import Login from  './components/Login';
 import Creategroup from  './components/Creategroup';
 import Createaccount from  './components/Createaccount';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Redirect } from 'react-router';
 require('./styles/App.css');
 
 class App extends Component {
@@ -17,7 +18,14 @@ class App extends Component {
         <Router>
           <MuiThemeProvider>
           <div className="App">
-            <Route exact={true} path="/" component={Individualdash} />
+            {/*<Route exact={true} path="/" render={() => (
+              (state is not blank) ? (
+                <Redirect to="/home"/>
+              ) : (
+                <Login/>
+              )
+            )}/>*/}
+            <Route path = '/home' component={Individualdash} />
             <Route path="/groups/:group" component={Groupdash} />
             <Route path="/login" component={Login} />
             <Route path="/creategroup" component={Creategroup} />

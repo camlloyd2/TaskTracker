@@ -13,6 +13,7 @@ import TextField from 'material-ui/TextField';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Link } from 'react-router-dom';
+import { Route, Redirect } from 'react-router';
 require('../styles/Login.css')
 
 var _this;
@@ -37,7 +38,12 @@ export default class Createaccount extends React.Component {
 
 
       handleLoginSubmit(e){
-          //need to send state to google firebase
+          //if ('email is valid') {
+            var loggedIn = true
+            //get user ID
+            updateId()
+          //}
+        
       }
       render() {
           return(
