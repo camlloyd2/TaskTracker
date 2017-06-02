@@ -50,6 +50,7 @@ export default class Individualdash extends Component {
       if(bool){
         this.state.tasks[key].completed =true;
         updateCompletedDB(this.state.tasks[key]);
+        updateScoreDB(this.state.tasks[key]);
         this.setState({
           groups:this.state.groups,
           tasks: this.state.tasks
@@ -93,7 +94,37 @@ export default class Individualdash extends Component {
     }
 }
 
-
+function updateScoreDB(task){
+  console.log(task.group_key);
+  var members = database.ref('/groups/' + task.group_key+'/members/');
+    members.once('value',function(snapshot){
+      getMembersInfo(snapshot.val(), task);
+    });
+}
+function getMembersInfo(data, task){
+  console.log("step 2")
+  console.log(data)
+  for(var key in data){
+    if(data[key].key == task.member_key){
+      console.log("we found the match");
+      updateMemberScore1(key, task.group_key, task.member_key)
+    }
+  }
+}
+function updateMemberScore1(key, group, member){
+  var score = database.ref('/groups/' + group+'/members/'+key);
+    score.once('value',function(snapshot){
+      console.log(snapshot.val().score)
+      updateMemberScore2(key, group, member, snapshot.val().score);
+    });
+}
+function updateMemberScore2(key, group, member, score){
+  console.log(key+group+member+score);
+  firebase.database().ref('/groups/' +group+'/members/'+key).set({
+    key:member,
+    score:score+1
+  });
+}
 function updateCompletedDB(task){
   firebase.database().ref('/tasks/' + task.key).set({
     group: task.group_key,
@@ -113,7 +144,6 @@ function getTasks(id){
 }
 
 function getTasksInfo(data){
-  var tasks =[];
   for(var key in data){
     var task_key = data[key].key;
     getTask(task_key);
