@@ -38,8 +38,8 @@ export default class Groupdash extends Component {
   constructor(props){
     super(props);
     _this = this;
-    //console.log("here is the match"+this.props.match)
     var group = "-KlZK5LaJrjNdH7GuXdb";
+    //console.log("here is the match"+this.props.match)
     var state = {
       members:[],
       tasks:[],
@@ -96,13 +96,14 @@ export default class Groupdash extends Component {
         var state = this.state;
         state.members = members;
         this.setState(state);
-        console.log("what is going on")
-        console.log(member);
+        //console.log("what is going on")
+        //console.log(member);
         addMemberGroupDB(member);
       }
 
     }
     render() {
+      console.log(this.props);
       var tasks = this.state.tasks.map((data) => {
             //console.log(data.member);
             var x = data.member;
@@ -122,11 +123,11 @@ export default class Groupdash extends Component {
       return (
         <div className="App">
 
-          <div className="Header">
-          <Header name={"-KlZK5LaJrjNdH7GuXdb"+" Dashboard"} />
-          </div>
+          {/*<div className="Header">
+          <Header name={" Dashboard"} />
+          </div>*/}
           <div className="Menu">
-          <Menu groups={this.state.groups}/>
+          <Menu groupid={group}groups={this.state.groups}/>
           </div>
           <Members addMember={this.addMember} members = {this.state.members} />
           <div className = "groupstuff">
@@ -152,8 +153,8 @@ export default class Groupdash extends Component {
     }
 }
 function addMemberGroupDB(member){
-  console.log("here i am")
-  console.log(member);
+  //console.log("here i am")
+  //console.log(member);
   var group = "-KlZK5LaJrjNdH7GuXdb";
   var key1 = firebase.database().ref().child('/groups/' +"-KlZK5LaJrjNdH7GuXdb"+ '/members/').push().key
   firebase.database().ref('/groups/' + group+ '/members/'+key1).set({
@@ -294,7 +295,7 @@ function getAllMembers(){
   });
 }
 function getAllMembersInfo(data){
-  console.log(data);
+  //console.log(data);
   for(var key in data){
     var mem = data[key];
     mem.key = key;

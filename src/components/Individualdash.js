@@ -73,8 +73,8 @@ export default class Individualdash extends Component {
       return (
         
         <div className="App">
-          <Header name="My DashBoard" />
-          <Menu groups={this.state.groups}/>
+          {/*<Header name="My DashBoard" />*/}
+          <Menu idash={true}groups={this.state.groups}/>
           <Table className="taskTable">
                 <TableHeader>
                     <TableRow >
@@ -95,18 +95,18 @@ export default class Individualdash extends Component {
 }
 
 function updateScoreDB(task){
-  console.log(task.group_key);
+  //console.log(task.group_key);
   var members = database.ref('/groups/' + task.group_key+'/members/');
     members.once('value',function(snapshot){
       getMembersInfo(snapshot.val(), task);
     });
 }
 function getMembersInfo(data, task){
-  console.log("step 2")
-  console.log(data)
+  //console.log("step 2")
+  //console.log(data)
   for(var key in data){
     if(data[key].key == task.member_key){
-      console.log("we found the match");
+      //console.log("we found the match");
       updateMemberScore1(key, task.group_key, task.member_key)
     }
   }
@@ -114,12 +114,12 @@ function getMembersInfo(data, task){
 function updateMemberScore1(key, group, member){
   var score = database.ref('/groups/' + group+'/members/'+key);
     score.once('value',function(snapshot){
-      console.log(snapshot.val().score)
+      //console.log(snapshot.val().score)
       updateMemberScore2(key, group, member, snapshot.val().score);
     });
 }
 function updateMemberScore2(key, group, member, score){
-  console.log(key+group+member+score);
+  //console.log(key+group+member+score);
   firebase.database().ref('/groups/' +group+'/members/'+key).set({
     key:member,
     score:score+1

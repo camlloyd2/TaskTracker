@@ -72,7 +72,7 @@ export default class Createaccount extends React.Component {
     }
       render() {
           if(!(this.props.id == null)){
-              return (<Redirect to="/home" />)
+              return (<Redirect to="/" />)
           }
           else{
             return(

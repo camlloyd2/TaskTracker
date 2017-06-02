@@ -82,7 +82,7 @@ export default class Login extends React.Component {
       render() {
           if(!(this.props.id == null)){
               console.log("here");
-              return (<Redirect to="/home" />)
+              return (<Redirect to="/" />)
           }
           else{
             return(
