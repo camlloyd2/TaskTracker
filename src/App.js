@@ -33,7 +33,7 @@ class App extends Component {
             <Route exact={true} path="/login" component={() => (<Login id={this.state.id}updateId={this.updateState} />) } />
             <Route exact={true} path="/creategroup" component={() => (<Creategroup id={this.state.id} />) } />
             <Route exact={true} path="/createaccount" component={() => (<Createaccount id={this.state.id}updateId={this.updateState} />) } />
-            <Route path="*" component={() => (<Other id={this.state.id} />)} />
+            {/*<Route path="*" component={() => (<Other id={this.state.id} />)} />*/}
           </div>
           </MuiThemeProvider>
         </Router>

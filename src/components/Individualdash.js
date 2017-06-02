@@ -103,26 +103,26 @@ function updateScoreDB(task){
 }
 function getMembersInfo(data, task){
   //console.log("step 2")
-  //console.log(data)
+  var imp = parseInt(task.imp);
   for(var key in data){
     if(data[key].key == task.member_key){
       //console.log("we found the match");
-      updateMemberScore1(key, task.group_key, task.member_key)
+      updateMemberScore1(key, task.group_key, task.member_key,imp)
     }
   }
 }
-function updateMemberScore1(key, group, member){
+function updateMemberScore1(key, group, member,imp){
   var score = database.ref('/groups/' + group+'/members/'+key);
     score.once('value',function(snapshot){
       //console.log(snapshot.val().score)
-      updateMemberScore2(key, group, member, snapshot.val().score);
+      updateMemberScore2(key, group, member, snapshot.val().score,imp);
     });
 }
-function updateMemberScore2(key, group, member, score){
+function updateMemberScore2(key, group, member, score,imp){
   //console.log(key+group+member+score);
   firebase.database().ref('/groups/' +group+'/members/'+key).set({
     key:member,
-    score:score+1
+    score:score+imp
   });
 }
 function updateCompletedDB(task){
@@ -201,94 +201,3 @@ function getGroup(key){
   });
 }
 
-
-
-function initDatabase(){
-//   var key0 = firebase.database().ref().child('members').push().key
-//   firebase.database().ref('/members/' + key0).set({
-//     name: "Will",
-//     email:"wjd6ca@virginia.eduu"
-// });
-// var key1 = firebase.database().ref().child('members').push().key
-//   firebase.database().ref('/members/' + key1).set({
-//     name: "Cam",
-//     email:"cam@virginia.eduu"
-// });
-// var key2 = firebase.database().ref().child('members').push().key
-//   firebase.database().ref('/members/' + key2).set({
-//     name: "Brent",
-//     email:"brent@portalanalytics.code"
-// });
-// var key3 = firebase.database().ref().child('groups').push().key
-//   firebase.database().ref('/groups/' + key3).set({
-//     name: "launch"
-// });
-// var key4 = firebase.database().ref().child('tasks').push().key
-//   firebase.database().ref('/tasks/' + key4).set({
-//     group: key3,
-//     member: key1,
-//     due:"June 1st",
-//     imp:4,
-//     completed:false,
-//dont forget name
-// });
-// var key5 = firebase.database().ref().child('tasks').push().key
-//   firebase.database().ref('/tasks/' + key5).set({
-//     group: key3,
-//     member: key0,
-//     due:"June 3",
-//     imp:2,
-//     completed:false,
-//     name:"trash"
-// });
-// var key6 = firebase.database().ref().child('tasks').push().key
-//   firebase.database().ref('/tasks/' + key6).set({
-//     group: key3,
-//     member: key0,
-//     due:"June 5",
-//     imp:1,
-//     completed:false,
-// });
-// var key7 = firebase.database().ref().child('/members/' + key0+ '/tasks/').push().key
-//   firebase.database().ref('/members/' + key0+ '/tasks/'+key7).set({
-//       key:key5
-//   });
-// var key8 = firebase.database().ref().child('/members/' + key0+ '/tasks/').push().key
-//   firebase.database().ref('/members/' + key0+ '/tasks/'+key8).set({
-//       key:key6
-//   });
-// var key9 = firebase.database().ref().child('/members/' + key1+ '/tasks/').push().key
-//   firebase.database().ref('/members/' + key1+ '/tasks/'+key9).set({
-//       key:key4
-//   });
-//   var key10 = firebase.database().ref().child('/members/' + key0+ '/groups/').push().key
-//   firebase.database().ref('/members/' + key0+ '/groups/'+key10).set({
-//       key:key3
-//   });
-//   var key11 = firebase.database().ref().child('/members/' + key1+ '/groups/').push().key
-//   firebase.database().ref('/members/' + key1+ '/groups/'+key11).set({
-//       key:key3
-//   });
-//   var key12 = firebase.database().ref().child('/groups/' + key3+ '/members/').push().key
-//   firebase.database().ref('/groups/' + key3+ '/members/'+key12).set({
-//       key:key0,
-//       score:0
-//   });
-//   var key13 = firebase.database().ref().child('/groups/' + key3+ '/members/').push().key
-//   firebase.database().ref('/groups/' + key3+ '/members/'+key13).set({
-//       key:key1,
-//   });
-//   var key14 = firebase.database().ref().child('/groups/' + key3+ '/tasks/').push().key
-//   firebase.database().ref('/groups/' + key3+ '/tasks/'+key14).set({
-//       key:key4
-//   });
-//   var key15 = firebase.database().ref().child('/groups/' + key3+ '/tasks/').push().key
-//   firebase.database().ref('/groups/' + key3+ '/tasks/'+key15).set({
-//       key:key5
-//   });
-//   var key16 = firebase.database().ref().child('/groups/' + key3+ '/tasks/').push().key
-//   firebase.database().ref('/groups/' + key3+ '/tasks/'+key16).set({
-//       key:key6
-//   });
-
-}
