@@ -13,7 +13,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      id:"-KlZK5LSVBOEND7SCbq-"
+      id:"-KlZK5LSVBOEND7SCbq-",
   }
   this.updateState = this.updateState.bind(this);
 }
