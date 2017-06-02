@@ -19,16 +19,20 @@ export default class Menu extends React.Component {
 
     }
     render(){
-        var title;
+        var title = null;
         let now= new Date();
         if(this.props.idash){
             title= "My DashBoard";
         }
         else{
-            for(var i=0;i<this.props.length;i++){
-                if(this.props.group[i].key == this.props.group){
-                    title=this.props.group[i].name;
+            for(var i=0;i<this.props.groups.length;i++){
+                if(this.props.groups[i].key == this.props.groupid){
+                    title= this.props.groups[i].name.toString();
+                    break;
                 }
+            }
+            if(title == null){
+                title="error page not found";
             }
         }
         var groups =[];

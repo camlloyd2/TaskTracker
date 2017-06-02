@@ -38,7 +38,7 @@ export default class Groupdash extends Component {
   constructor(props){
     super(props);
     _this = this;
-    var group = "-KlZK5LaJrjNdH7GuXdb";
+    var group = window.location.href.split("/").pop();
     //console.log("here is the match"+this.props.match)
     var state = {
       members:[],
@@ -103,7 +103,7 @@ export default class Groupdash extends Component {
 
     }
     render() {
-      console.log(this.props);
+      var groupid = window.location.href.split("/").pop();
       var tasks = this.state.tasks.map((data) => {
             //console.log(data.member);
             var x = data.member;
@@ -127,7 +127,7 @@ export default class Groupdash extends Component {
           <Header name={" Dashboard"} />
           </div>*/}
           <div className="Menu">
-          <Menu groupid={group}groups={this.state.groups}/>
+          <Menu groupid={window.location.href.split("/").pop()}groups={this.state.groups}/>
           </div>
           <Members addMember={this.addMember} members = {this.state.members} />
           <div className = "groupstuff">
@@ -155,8 +155,8 @@ export default class Groupdash extends Component {
 function addMemberGroupDB(member){
   //console.log("here i am")
   //console.log(member);
-  var group = "-KlZK5LaJrjNdH7GuXdb";
-  var key1 = firebase.database().ref().child('/groups/' +"-KlZK5LaJrjNdH7GuXdb"+ '/members/').push().key
+  var group = window.location.href.split("/").pop();
+  var key1 = firebase.database().ref().child('/groups/' +group+ '/members/').push().key
   firebase.database().ref('/groups/' + group+ '/members/'+key1).set({
       key:member.key,
       score:0
