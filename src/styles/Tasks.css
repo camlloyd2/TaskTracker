@@ -9,6 +9,6 @@
 
 }
 .taskTable, th,td {
-    font-family: courier;
+    font-family: 'Roboto', sans-serif;
     border: 5px black;
 }

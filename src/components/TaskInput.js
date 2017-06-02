@@ -4,7 +4,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import {
   Table,
   TableBody,
@@ -87,7 +87,7 @@ export default class TaskInput extends Component {
                             onChange = {this.handleDueByChange}/>
                     </TableRowColumn>
                     <TableRowColumn>
-                        <FlatButton onClick={this.handleSubmit}  label="Submit"  />
+                        <RaisedButton onClick={this.handleSubmit}  label="Submit"  />
                     </TableRowColumn>
                 </TableRow>
                 </TableHeader>

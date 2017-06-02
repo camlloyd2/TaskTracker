@@ -8,7 +8,7 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import clipboard from '../images/clipboard.png';
 import Time from 'react-time';
 require("../styles/Menu.css");
@@ -42,7 +42,7 @@ export default class Menu extends React.Component {
             groups.push(
             <TableRowColumn>
                 <Link to = {link}>
-                    <FlatButton className="menubutton" key={key}>{this.props.groups[i].name}</FlatButton>
+                    <RaisedButton key={key}>{this.props.groups[i].name}</RaisedButton>
                 </Link>
             </TableRowColumn>)
         }
@@ -62,10 +62,10 @@ export default class Menu extends React.Component {
                 <TableHeader>
                     <TableRow>
                         <TableRowColumn>
-                            <Link to="/"><FlatButton className="menubutton" key="1">My Tasks</FlatButton></Link>
+                            <Link to="/"><RaisedButton key="1">My Tasks</RaisedButton></Link>
                         </TableRowColumn>
                         <TableRowColumn>
-                            <Link to="/creategroup"><FlatButton className="menubutton" key="2" >Create Group</FlatButton></Link>
+                            <Link to="/creategroup"><RaisedButton key="2" >Create Group</RaisedButton></Link>
                         </TableRowColumn>
                         {groups}
                     </TableRow>

@@ -3,17 +3,22 @@
     width:30%;
 }
 
+.Menu {
+    margin-bottom:40px;
+    width:100%;
+}
+
 .groupstuff {
-    margin-top:12px;
+    margin-top:100px;
     margin-right:12px;
     float:right;
-    width:70%;
+    width:58%;
     
 }
 
 .memberTable {
-    margin-top:12px;
-    margin-left: 12px;
+    margin-top:100px;
+    margin-left: 1px;
     float:left;
-    width:27%;
+    width:20%;
 }

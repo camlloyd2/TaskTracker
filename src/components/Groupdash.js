@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from  './Header';
+//import Header from  './Header';
 import Menu from  './Menu';
 import Members from './Members';
 import Time from 'react-time';
