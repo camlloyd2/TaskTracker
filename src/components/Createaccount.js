@@ -61,7 +61,6 @@ export default class Createaccount extends React.Component {
         if (acceptable){
             updateMembersDB(this.state)
             state.unacceptableEmails.slice().concat([userEmail]);
-            goHome()
         } else {
             window.alert('This email is not a valid email')      
         }
@@ -72,7 +71,11 @@ export default class Createaccount extends React.Component {
         });
     }
       render() {
-          return(
+          if(!(this.props.id == null)){
+              return (<Redirect to="/home" />)
+          }
+          else{
+            return(
               <div className = 'input'>
                   <h1 className = "h1"> Create Account </h1>
                   <Table>
@@ -96,6 +99,7 @@ export default class Createaccount extends React.Component {
                   </Table>
               </div>
           )
+          }
       }
   }
 
@@ -125,8 +129,4 @@ function getExistingEmails() {
             )
         }
   });
-}
-
-function goHome() {
-    <Redirect to="/home"/>
 }

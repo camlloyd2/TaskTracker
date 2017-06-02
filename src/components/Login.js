@@ -28,13 +28,14 @@ var database = firebase.database();
 require('../styles/Login.css')
 
 var _this;
-export default class Createaccount extends React.Component {
+export default class Login extends React.Component {
   constructor(){  
           super();
           _this = this;
           this.state=({
              email:'',
              acceptableEmails:[],
+             acceptableMembers:[]
           });
       this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
       this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -53,11 +54,22 @@ export default class Createaccount extends React.Component {
       handleLoginSubmit(e){
         var state = this.state;
         var userEmail = state.email
-        console.log(this.state.acceptableEmails)
+        //console.log(this.state.acceptableEmails)
         var acceptable = (state.acceptableEmails.includes(userEmail));
         if (acceptable){
-            console.log('valid')
-            //_this.props.updateState() need to set id equal to email's id
+            for(var i=0;i<this.state.acceptableMembers.length;i++){
+                if(this.state.acceptableMembers[i].email == userEmail){
+                    var key = this.state.acceptableMembers[i].key;
+                    //console.log(this.state.acceptableMembers[i].key)
+                    this.props.updateId(key);
+                    //this.state.redirect = true;
+                    //<Redirect to="/home"/>
+                    //this.context.router.push('/home')
+
+
+                    break;
+                }
+            }
         } else {
             window.alert('This email is not a valid email')      
         }
@@ -68,7 +80,12 @@ export default class Createaccount extends React.Component {
         
       }
       render() {
-          return(
+          if(!(this.props.id == null)){
+              console.log("here");
+              return (<Redirect to="/home" />)
+          }
+          else{
+            return(
               <div className = 'input'>
                   <h1 className = "h1"> Login to TaskTracker </h1>
                   <Table className = 'table'>
@@ -93,6 +110,7 @@ export default class Createaccount extends React.Component {
                 
               </div>
           )
+          }
       }
   }
 
@@ -103,9 +121,11 @@ export default class Createaccount extends React.Component {
         for(var mem in snapshot.val()){
             var member = snapshot.val()[mem];
             var x  = _this.state
+            member.key = mem;
             var emails = _this.state.acceptableEmails.slice().concat([member.email]);
             x.acceptableEmails = emails;
-            console.log(x)
+            x.acceptableMembers = _this.state.acceptableMembers.slice().concat([member]);
+            //console.log(x)
             _this.setState(
                 x
             )

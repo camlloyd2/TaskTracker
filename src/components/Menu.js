@@ -33,7 +33,7 @@ export default class Menu extends React.Component {
                 <TableHeader>
                     <TableRow>
                         <TableRowColumn>
-                            <Link to="/"><FlatButton className="menubutton" key="1">My Tasks</FlatButton></Link>
+                            <Link to="/home"><FlatButton className="menubutton" key="1">My Tasks</FlatButton></Link>
                         </TableRowColumn>
                         <TableRowColumn>
                             <Link to="/creategroup"><FlatButton className="menubutton" key="2" >Create Group</FlatButton></Link>
