@@ -12,9 +12,22 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Redirect } from 'react-router';
 require('../styles/Createaccount.css');
 
+var firebase = require('firebase');
+var config = {
+    apiKey: "AIzaSyBIfwtEwz8roKK-rlzzyL0hJw_LhoLfo9k",
+    authDomain: "tasktracker-c6e2e.firebaseapp.com",
+    databaseURL: "https://tasktracker-c6e2e.firebaseio.com",
+    projectId: "tasktracker-c6e2e",
+    storageBucket: "tasktracker-c6e2e.appspot.com",
+    messagingSenderId: "1071842907632"
+  };
+
+var database = firebase.database();
 var _this;
+
 export default class Createaccount extends React.Component {
   constructor(){  
           super();
@@ -22,40 +35,39 @@ export default class Createaccount extends React.Component {
           this.state=({
              email:'',
              name:'',
-             unacceptableEmails:['unacceptable1']
+             unacceptableEmails: [],
           });
       this.handleEmailChange = this.handleEmailChange.bind(this);
+      this.handleNameChange = this.handleNameChange.bind(this);
+      this.handleNewUserSubmit = this.handleNewUserSubmit.bind(this);
+      getExistingEmails();
   }
-
       handleEmailChange(e){
-          var state = _this.state;
+          var state = this.state;
           state.email = e.target.value;
-          _this.setState({
-              state
-          });
+          this.setState(state);
       }
       handleNameChange(e){
-          var state = _this.state;
+          var state = this.state;
           state.name = e.target.value;
-          _this.setState({
-              state
-          });
+          this.setState( state);
       }
 
     handleNewUserSubmit(e){
-        var state = _this.state;
+        var state = this.state;
         var userEmail = state.email.toString();
+        console.log(this.state)
         var acceptable = !(state.unacceptableEmails.includes(userEmail));
         if (acceptable){
-            // send to firebase
-            //redirect to home 
+            updateMembersDB(this.state)
+            state.unacceptableEmails.slice().concat([userEmail]);
+            goHome()
         } else {
-            console.log('not acceptable')
-            
+            window.alert('This email is not a valid email')      
         }
         state.email = '';
         state.name = '';
-        _this.setState({
+        this.setState({
             state
         });
     }
@@ -86,3 +98,35 @@ export default class Createaccount extends React.Component {
           )
       }
   }
+
+  function updateMembersDB(newmember, id) { //id should be generated where function is called?
+       var key0 = firebase.database().ref().child('/members/').push().key
+            firebase.database().ref('/members/' + key0).set({
+            key:key0,
+            name: newmember.name,
+            email:newmember.email
+  });
+}
+
+function getExistingEmails() {
+    var existingEmails = database.ref('/members/');
+    //console.log(existingEmails)
+    existingEmails.once('value', function(snapshot){
+        console.log(snapshot.val());
+        for(var mem in snapshot.val()){
+            var member = snapshot.val()[mem];
+            console.log(member.email)
+            var x  = _this.state
+            var emails = _this.state.unacceptableEmails.slice().concat([member.email]);
+            x.unacceptableEmails =emails;
+            console.log(x)
+            _this.setState(
+                x
+            )
+        }
+  });
+}
+
+function goHome() {
+    <Redirect to="/home"/>
+}

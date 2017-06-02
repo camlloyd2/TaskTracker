@@ -179,6 +179,7 @@ function getGroups(id){
       getGroupsInfo(snapshot.val());
   });
 }
+
 function getGroupsInfo(data){
   var groups =[];
   for(var key in data){
