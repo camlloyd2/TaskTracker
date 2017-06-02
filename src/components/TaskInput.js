@@ -45,11 +45,15 @@ export default class TaskInput extends Component {
 
     }
     handleRatingChange(e){
-        var state = this.state
-        state.imp = e.target.value;
-        this.setState(
-            state
-        );
+        var x = e.target.value
+        //console.log(x);
+        if(x == "1" || x == "2" || x == "3" || x == "4" || x == "5" || x == ""){
+            var state = this.state
+            state.imp = e.target.value;
+            this.setState(
+                state
+            );
+        }
     }
     handleDueByChange = (e, date) => {
         var state = this.state
@@ -78,7 +82,7 @@ export default class TaskInput extends Component {
                         <TextField hintText = "Task Name" value={this.state.name} onChange={this.handleNameChange}/>
                     </TableRowColumn>
                     <TableRowColumn>
-                        <TextField type="number" min="1" max="5" hintText= "Task Rating (1-5)" value={this.state.imp} onChange={this.handleRatingChange}/>
+                        <TextField  hintText= "Task Rating (1-5)" value={this.state.imp} onChange={this.handleRatingChange}/>
                     </TableRowColumn>
                     <TableRowColumn>
                         <DatePicker defaultDate={now} 

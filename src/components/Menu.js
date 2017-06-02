@@ -31,9 +31,6 @@ export default class Menu extends React.Component {
                     break;
                 }
             }
-            if(title == null){
-                title="error page not found";
-            }
         }
         var groups =[];
         for (var i=0;i<this.props.groups.length;i++){
@@ -59,8 +56,9 @@ export default class Menu extends React.Component {
                    </div>
                 </div>
             <Table className = 'menu'>
-                <TableHeader>
-                    <TableRow>
+                <TableHeader displaySelectAll={false}
+              adjustForCheckbox={false}>
+                    <TableRow selectable={false}>
                         <TableRowColumn>
                             <Link to="/"><RaisedButton key="1">My Tasks</RaisedButton></Link>
                         </TableRowColumn>

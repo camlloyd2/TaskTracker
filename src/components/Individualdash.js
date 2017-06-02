@@ -5,6 +5,7 @@ import '../styles/Individualdash.css';
 import Menu from  './Menu';
 import Tasks from  './Tasks';
 import star from '../images/star.gif';
+import RaisedButton from 'material-ui/RaisedButton';
 import {
   Table,
   TableBody,
@@ -61,12 +62,12 @@ export default class Individualdash extends Component {
       var tasks = this.state.tasks.map((data,i) => {
         //console.log(data);
         return (
-          <TableRow hidden={data.completed}>
+          <TableRow selectable={false}>
                 <TableRowColumn>{data.group}</TableRowColumn>
                 <TableRowColumn>{data.name}</TableRowColumn>
                 <TableRowColumn>{data.imp}</TableRowColumn>
-                <TableRowColumn>{data.due}</TableRowColumn>
-                <TableRowColumn><button onClick={() => this.confirmComplete(i)}>Complete!</button></TableRowColumn>
+                <TableRowColumn>{data.due.split("00")[0]}</TableRowColumn>
+                <TableRowColumn><RaisedButton onClick={() => this.confirmComplete(i)}>Complete!</RaisedButton></TableRowColumn>
             </TableRow>
         )
       })
@@ -76,8 +77,9 @@ export default class Individualdash extends Component {
           {/*<Header name="My DashBoard" />*/}
           <Menu idash={true}groups={this.state.groups}/>
           <Table className="taskTable">
-                <TableHeader>
-                    <TableRow >
+                <TableHeader displaySelectAll={false}
+              adjustForCheckbox={false}>
+                    <TableRow selectable={false}>
                         <TableHeaderColumn>Group</TableHeaderColumn>
                         <TableHeaderColumn>Task Name</TableHeaderColumn>
                         <TableHeaderColumn>Importance</TableHeaderColumn>
@@ -85,7 +87,7 @@ export default class Individualdash extends Component {
                         <TableHeaderColumn><img className="completeStar" src={star} /></TableHeaderColumn>
                     </TableRow>
                 </TableHeader>
-                <TableBody>
+                <TableBody displayRowCheckbox={false}>
                     {tasks}
                 </TableBody>
             </Table>

@@ -60,7 +60,7 @@ export default class Groupdash extends Component {
       var num = Math.floor(Math.random()*len);
       var member = this.state.members[num].key;
       var group = "-KlZK5LaJrjNdH7GuXdb";
-      var task ={group:group,name:task.name,imp:task.imp,due:task.due.toString(),completed:false,member:member}
+      var task ={group:window.location.href.split("/").pop(),name:task.name,imp:task.imp,due:task.due.toString(),completed:false,member:member}
       addTaskDB(task);
       task.member = this.state.members[num].name;
       var tasks = this.state.tasks.slice().concat([task]);
@@ -112,7 +112,7 @@ export default class Groupdash extends Component {
                     <TableRowColumn>{data.member}</TableRowColumn>
                     <TableRowColumn>{data.name}</TableRowColumn>
                     <TableRowColumn>{data.imp} </TableRowColumn>
-                    <TableRowColumn>{data.due}</TableRowColumn>
+                    <TableRowColumn>{data.due.split("00")[0]}</TableRowColumn>
                     <TableRowColumn>{data.completed.toString()}</TableRowColumn>
                 </TableRow>
             )
