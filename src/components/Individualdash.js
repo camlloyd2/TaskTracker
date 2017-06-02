@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import '../styles/Individualdash.css';
-import Header from  './Header';
+// import Header from  './Header';
 import Menu from  './Menu';
 import Tasks from  './Tasks';
 import star from '../images/star.gif';
