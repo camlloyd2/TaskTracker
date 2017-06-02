@@ -24,7 +24,6 @@ var config = {
   };
 
 var database = firebase.database();
-var _this;
 
 export default class CreateGroup extends Component {
     constructor(){  
@@ -35,6 +34,8 @@ export default class CreateGroup extends Component {
             GroupName:'',
             tempEmail:'',
             memberEmails: [],
+            acceptableEmails: ['email1','email2','email3'],
+            members:[],
             acceptableMembers:[]
         });
     this.handleGroupNameChange = this.handleGroupNameChange.bind(this);
@@ -56,37 +57,40 @@ export default class CreateGroup extends Component {
     handleGroupNameSubmit(e){
     var state = this.state;
     state.GroupName = state.tempGroupName;
-    this.setState({
+    _this.setState({
         state
     });
 
 }
     handleMemberChange(e){
-        var state = this.state;
+        var state = _this.state;
         state.tempEmail = e.target.value;
-        this.setState({
+        _this.setState({
             state
         })
     }
 
     handleMemberSubmit(e){
         var state = this.state;
-        var stringTempEmail = this.state.tempEmail.toString();
-        var found = state.memberEmails.includes(stringTempEmail);
-        for(var mem in this.state.acceptableMembers){
-            if(mem.email == str)
-        }
-        var acceptable = state.acceptableEmails.includes(stringTempEmail);
+        var found = state.memberEmails.includes(this.state.tempEmail);
+        var acceptable = state.acceptableEmails.includes(this.state.tempEmail);
         if (!found && acceptable){
-            state.memberEmails = state.memberEmails.slice().concat([state.tempEmail]);
+            state.memberEmails = state.memberEmails.slice().concat([this.state.tempEmail]);
+            for(var i=0;i<this.state.acceptableMembers.length;i++){
+                console.log(this.state.acceptableMembers[i].email + this.state.tempEmail);
+                if(this.state.acceptableMembers[i].email == this.state.tempEmail){
+                    state.members = state.members.slice().concat([this.state.acceptableMembers[i]]);
+                    break;
+                }
+            }
         }
         state.tempEmail = '';
-        this.setState({
+        _this.setState({
             state
         });
     }
     handleGroupSubmit(e){
-        addGroupDB(this.state.GroupName,this.state.memberEmails);
+        addGroupDB(this.state.GroupName,this.state.members);
         var state = this.state;
         state.GroupName = '';
         state.memberEmails = [];
@@ -153,12 +157,14 @@ function getEmails(){
     //console.log(existingEmails)
     existingEmails.once('value', function(snapshot){
         //console.log(snapshot.val());
-        for(var mem in snapshot.val()){
-            var member = snapshot.val()[mem];
+        for(var key in snapshot.val()){
+            var member = snapshot.val()[key];
             //console.log(member.email)
+            member.key = key;
             var x  = _this.state
             var emails = _this.state.acceptableEmails.slice().concat([member.email]);
             x.acceptableEmails =emails;
+            x.acceptableMembers = _this.state.acceptableMembers.slice().concat([member]);
             //console.log(x)
             _this.setState(
                 x
@@ -167,10 +173,23 @@ function getEmails(){
   });
 }
 
-function addGroupDB(name, emails){
+function addGroupDB(name, members){
+    console.log(members)
     var key0 = firebase.database().ref().child('groups').push().key
     firebase.database().ref('/groups/' + key0).set({
-        name:name
+        name:name,
+        key:key0
     });
+    for(var mem in members){
+        var member = (members[mem])
+        firebase.database().ref('/groups/' + key0+'/members/'+member.key).set({
+            key:member.key,
+            score:0
+        });
+        firebase.database().ref('/members/' + member.key+'/groups/'+key0).set({
+            key:key0
+        });
+    }
+
     
 }
