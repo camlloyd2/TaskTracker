@@ -13,31 +13,25 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      id:"-KlZK5LSVBOEND7SCbq-"
+      id:sessionStorage.getItem('id')
   }
   this.updateState = this.updateState.bind(this);
 }
     updateState(key){
-      this.state({id:key});
+      sessionStorage.setItem('id',key)
+      this.setState({id:key});
     }
     render() {
+      console.log(this.state.id);
       return (
         <Router>
           <MuiThemeProvider>
           <div className="App">
-            {/*<Route exact={true} path="/" render={() => (
-              (state is not blank) ? (
-                <Redirect to="/home"/>
-              ) : (
-                <Login/>
-              )
-            )}/>*/}
-
             <Route exact={true} path="/home" component={() => (<Individualdash id={this.state.id} />) } />
             <Route path="/groups/:group" component={() => (<Groupdash id={this.state.id} />) } />
-            <Route path="/login" component={() => (<Login updateId={this.updateState} />) } />
+            <Route path="/login" component={() => (<Login id={this.state.id}updateId={this.updateState} />) } />
             <Route path="/creategroup" component={() => (<Creategroup id={this.state.id} />) } />
-            <Route path="/createaccount" component={() => (<Createaccount updateId={this.updateState} />) } />
+            <Route path="/createaccount" component={() => (<Createaccount id={this.state.id}updateId={this.updateState} />) } />
 
           </div>
           </MuiThemeProvider>

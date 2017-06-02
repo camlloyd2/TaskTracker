@@ -34,25 +34,12 @@ var _this;
 var group;
 var now = new Date();
 
-// var task1 = {member:"cam",name:"Take out the trash",imp:"2",due:now,completed:false};
-// var task2 = {member:"cam",name:"Dishes",imp:"5",due:now,completed:false};
-// var task3 = {member:"will",name:"Vacuuming",imp:"1",due:now,completed:false};
-
-// var members = [{key:'Jack', name: 'Jack', score:7}, {key:'brent',name:'Brent',score:10}, {key:'mike',name: 'Mike', score: -4}]
-// data.setItem('tasks',JSON.stringify([task1,task2,task3]));
-// data.setItem('members',JSON.stringify(members));
-
 export default class Groupdash extends Component {
   constructor(props){
     super(props);
     _this = this;
-    console.log("here is the match"+this.props.match)
+    //console.log("here is the match"+this.props.match)
     var group = "-KlZK5LaJrjNdH7GuXdb";
-    //group = this.props.match.params.group;
-    // task1.group = group;
-    // task2.group= group;
-    // task3.group=group;
-    //var tasks=[task1,task2,task3]
     var state = {
       members:[],
       tasks:[],
@@ -68,32 +55,56 @@ export default class Groupdash extends Component {
     this.addMember = this.addMember.bind(this);
   }
     addTask(task){
-      console.log("add task reached with "+task);
-      var len = _this.state.members.length;
+      //console.log("add task reached with "+task);
+      var len = this.state.members.length;
       var num = Math.floor(Math.random()*len);
-      var member = _this.state.members[num].key;
-      var task ={group:group,name:task.name,imp:task.imp,due:task.due,completed:false,member:member}
+      var member = this.state.members[num].key;
+      var group = "-KlZK5LaJrjNdH7GuXdb";
+      var task ={group:group,name:task.name,imp:task.imp,due:task.due.toString(),completed:false,member:member}
       addTaskDB(task);
+      task.member = this.state.members[num].name;
       var tasks = this.state.tasks.slice().concat([task]);
       var state = this.state;
       state.tasks = tasks;
       this.setState(state);
     }
-    addMember(name){
-      var newperson = {name: name, score: 0};
-      var found = this.state.members.includes(newperson.name);
-      var acceptable = this.state.allmembers.includes(newperson.name);
+    addMember(email){
+      var newperson = {name:"", score: 0};
+      var found = false;
+      var acceptable=false;
+      var member;
+      //console.log(this.state.allmembers)
+      for(var i=0; i<this.state.allmembers.length;i++){
+        //console.log(email + this.state.allmembers[i].email)
+        if(email == this.state.allmembers[i].email){
+          acceptable=true;
+          member = this.state.allmembers[i];
+          member.score = 0;
+          break;
+        }
+      }
+      for(var i=0;i<this.state.members.length;i++){
+        if(email == this.state.members[i].email){
+          found=true;
+          break;
+        }
+      }
+      //console.log(found);
+      //console.log(acceptable);
       if (!found && acceptable){
-        var members = this.state.members.slice().concat([newperson]);
+        var members = this.state.members.slice().concat([member]);
         var state = this.state;
         state.members = members;
         this.setState(state);
+        console.log("what is going on")
+        console.log(member);
+        addMemberGroupDB(member);
       }
 
     }
     render() {
       var tasks = this.state.tasks.map((data) => {
-            console.log(data.member);
+            //console.log(data.member);
             var x = data.member;
             return (
                 <TableRow>
@@ -105,14 +116,14 @@ export default class Groupdash extends Component {
                 </TableRow>
             )
         })
-        console.log(this.state.tasks[0]);
+        //console.log(this.state.tasks[0]);
         var data =this.state.tasks;
-        console.log(data);
+        //console.log(data);
       return (
         <div className="App">
 
           <div className="Header">
-          <Header name={group+" Dashboard"} />
+          <Header name={"-KlZK5LaJrjNdH7GuXdb"+" Dashboard"} />
           </div>
           <div className="Menu">
           <Menu groups={this.state.groups}/>
@@ -140,8 +151,22 @@ export default class Groupdash extends Component {
     );
     }
 }
-
+function addMemberGroupDB(member){
+  console.log("here i am")
+  console.log(member);
+  var group = "-KlZK5LaJrjNdH7GuXdb";
+  var key1 = firebase.database().ref().child('/groups/' +"-KlZK5LaJrjNdH7GuXdb"+ '/members/').push().key
+  firebase.database().ref('/groups/' + group+ '/members/'+key1).set({
+      key:member.key,
+      score:0
+  });
+  var key2 = firebase.database().ref().child('/members/' +member.key+ '/groups/').push().key
+  firebase.database().ref('/members/' + member.key+ '/groups/'+key2).set({
+      key:group
+  });
+}
 function addTaskDB(task){
+  //console.log(task);
   var key = firebase.database().ref().child('tasks').push().key
   firebase.database().ref('/tasks/' + key).set({
     group: task.group,
@@ -153,11 +178,11 @@ function addTaskDB(task){
   });
   var key1 = firebase.database().ref().child('/groups/' +task.group+ '/tasks/').push().key
   firebase.database().ref('/groups/' + task.group+ '/tasks/'+key1).set({
-      key:key1
+      key:key
   });
   var key2 = firebase.database().ref().child('/members/' +task.member+ '/tasks/').push().key
   firebase.database().ref('/members/' +task.member+ '/tasks/'+key2).set({
-      key:key2
+      key:key
   });
 }
 
@@ -243,26 +268,23 @@ function getMembers(id){
 function getMemberInfo(data){
   for(var key in data){
     var member_key = data[key].key;
-    getMember(member_key);
+    getMember(member_key, data[key].score);
   }
 }
 
-function getMember(key){
+function getMember(key, score){
+  //console.log(key);
   var member = database.ref('/members/'+key);
   member.once('value', function(snapshot){
     var mem = snapshot.val();
-    console.log(mem);
+    //console.log(mem);
     mem.key = key;
-    var group = database.ref('/groups/'+group+'/members/'+key);
-    group.once('value', function(snapshot){
-      var score = snapshot.val().score;
-      mem.score = score;
+      mem.score=score;
       var members = _this.state.members.slice().concat([mem]);
       var state = _this.state;
       state.members = members;
       _this.setState(state);
     });
-  });
 }
 
 function getAllMembers(){
@@ -272,20 +294,13 @@ function getAllMembers(){
   });
 }
 function getAllMembersInfo(data){
+  console.log(data);
   for(var key in data){
-    var member_key = data[key].key;
-    getAllMember(member_key);
-  }
-  
-}
-function getAllMember(key){
-  var member = database.ref('/member/'+key);
-  member.once('value', function(snapshot){
-    var mem = snapshot.val();
+    var mem = data[key];
     mem.key = key;
     var members = _this.state.allmembers.slice().concat([mem]);
     var state = _this.state;
     state.allmembers =members;
     _this.setState(state);
-  });
+  }
 }
